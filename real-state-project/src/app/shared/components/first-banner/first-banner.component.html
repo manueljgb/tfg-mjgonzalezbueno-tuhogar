@@ -1,0 +1,20 @@
+<div
+  class="main-container"
+  [style.backgroundImage]="'url(' + backgroundImageURL + ')'"
+>
+  <div class="card move-left">
+    <img class="logo" [src]="logoSrc" alt="Logo Inmobiliaria">
+    <!-- Para poder decorar el juego de palabras en HOME -->
+    <p *ngIf="tittle">{{ tittle }}</p>
+    <p *ngIf="!tittle">Ya has encontrado <u>TuHogar.</u> </p>
+    <p *ngIf="!tittle">Deja que nosotros encontremos <u>tu vivienda.</u></p>
+  </div>
+  <div class="call-to-action" *ngIf="callToActionButtons">
+    <button mat-raised-button color="contacto" routerLink="/vende-tu-vivienda">
+      <span>Vende tu vivienda</span>
+    </button>
+    <button mat-raised-button color="vivienda" routerLink="/viviendas">
+      <span>Encuentra tu vivienda</span>
+    </button>
+  </div>
+</div>

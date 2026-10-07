@@ -1,0 +1,38 @@
+<div class="main-container">
+  <div
+    class="image-banner"
+    [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }"
+  >
+    <h1>{{ title }}</h1>
+  </div>
+  <h2 class="header-intro">¿Por qué elegir {{ title }}?</h2>
+  <hr />
+  <p class="intro-text" [ngClass]="displayFullText? 'full-text':''">
+    {{introText}}
+  </p>
+  <div class="icon" (click)="toggleText()"  *ngIf="isMobile">
+    <img src="/assets/svg/angle-down-solid-primary-color.svg" class="read-more"/>
+    <img src="/assets/svg/angle-down-solid-primary-color.svg" class="read-more"/>
+  </div>
+
+  <h2 class="header-intro">
+    Mira las razones por las que mudarte a
+    {{ title }} es buena idea
+  </h2>
+  <hr />
+
+  <div class="reasons-to-move">
+    <ng-container *ngFor="let elem of data">
+      <app-places-bullet-info
+        [iconSource]="elem.iconSource"
+        [title]="elem.title"
+        [info]="elem.info"
+      ></app-places-bullet-info>
+    </ng-container>
+  </div>
+
+  <h1 class="header-intro"> Compruébalo tu mismo</h1>
+  <hr />
+
+  <div #mapRef class="map"></div>
+</div>

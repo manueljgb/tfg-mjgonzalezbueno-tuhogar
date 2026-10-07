@@ -1,0 +1,106 @@
+@import 'theme';
+
+.main-container {
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  justify-content: start;
+  background-color: #f8f8f8;
+  height: 100%;
+  padding: 30px;
+  height: 75vh;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 35px;
+  color: $primary-color;
+  font-weight: 600;
+  font-size: 4rem;
+}
+
+.menu-items {
+  width: fit-content;
+  margin: 0px auto;
+  a {
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.menu-button {
+  margin: 5px auto;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: fit-content;
+  color: $black;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  span {
+    width: fit-content;
+  }
+}
+
+.headerSubMenuItems {
+  background-color: white;
+  font-weight: bold;
+  width: 200px;
+}
+
+.containerMenuSubItems {
+  button {
+    text-align: center;
+    line-height: 2px;
+  }
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border: 2px solid red;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  :last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+.red-button{
+  color: white;
+  background-color: $primary-color;
+  padding: 5px 22px;
+}
+
+mat-divider {
+  margin: 22px auto;
+  width: 17rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 50px;
+  a img {
+    color: $primary-color;
+  }
+
+  .location{
+    width: 34.31px;
+    height: 40.36px;
+  }
+}

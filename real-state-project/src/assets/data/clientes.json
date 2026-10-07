@@ -1,0 +1,14 @@
+{
+  "clients": [
+    {
+      "phone": 600000001,
+      "name": "Contacto de ejemplo 25",
+      "mail": "contacto1@example.com",
+      "other_mails": [],
+      "messages": [
+        "Me gustaría ver estos pisos"
+      ],
+      "favs_appartments": []
+    }
+  ]
+}

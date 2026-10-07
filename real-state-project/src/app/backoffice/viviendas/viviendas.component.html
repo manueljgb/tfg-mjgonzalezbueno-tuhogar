@@ -1,0 +1,111 @@
+<div class="viviendas-container">
+  <h2>Gestion de Viviendas</h2>
+
+  <button mat-raised-button color="primary" (click)="crearVivienda()">
+    <mat-icon>add</mat-icon>
+    Crear Nueva Vivienda
+  </button>
+
+  <div class="resumen-viviendas" *ngIf="resumenViviendas$ | async as resumen">
+    <div>
+      <span>Total</span>
+      <strong>{{ resumen.total }}</strong>
+    </div>
+    <div>
+      <span>Disponibles</span>
+      <strong>{{ resumen.disponibles }}</strong>
+    </div>
+    <div>
+      <span>Reservadas</span>
+      <strong>{{ resumen.reservadas }}</strong>
+    </div>
+    <div>
+      <span>Vendidas</span>
+      <strong>{{ resumen.vendidas }}</strong>
+    </div>
+    <div>
+      <span>Precio medio</span>
+      <strong>{{ resumen.precioMedio | currency:'EUR' }}</strong>
+    </div>
+  </div>
+
+  <form class="filtros" [formGroup]="filtrosForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="available">Disponible</mat-option>
+        <mat-option value="reserved">Reservado</mat-option>
+        <mat-option value="sold">Vendido</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ubicacion</mat-label>
+      <input matInput formControlName="ubicacion">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Precio maximo</mat-label>
+      <input matInput type="number" formControlName="precioMaximo">
+    </mat-form-field>
+  </form>
+
+  <table class="viviendas-table mat-elevation-z8">
+    <thead>
+      <tr>
+        <th class="clickable" (click)="ordenar('price')">Precio <span class="sort-icon">{{ obtenerIconoOrdenamiento('price') }}</span></th>
+        <th>Descuento</th>
+        <th>Tipo</th>
+        <th class="clickable" (click)="ordenar('ubication')">Ubicacion <span class="sort-icon">{{ obtenerIconoOrdenamiento('ubication') }}</span></th>
+        <th>m2</th>
+        <th>Eficiencia</th>
+        <th>Hab.</th>
+        <th>Baños</th>
+        <th>Año</th>
+        <th>Pisos</th>
+        <th>Extras</th>
+        <th class="clickable" (click)="ordenar('status')">Estado <span class="sort-icon">{{ obtenerIconoOrdenamiento('status') }}</span></th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vivienda of viviendasFiltradas$ | async">
+        <td>{{ vivienda.price | currency:'EUR' }}</td>
+        <td>{{ vivienda.discount }}%</td>
+        <td>{{ vivienda.type }}</td>
+        <td>{{ vivienda.ubication }}</td>
+        <td>{{ vivienda.square_metres }}</td>
+        <td>{{ vivienda.energy_efficiency }}</td>
+        <td>{{ vivienda.rooms }}</td>
+        <td>{{ vivienda.bathrooms }}</td>
+        <td>{{ vivienda.date_built }}</td>
+        <td>{{ vivienda.floors }}</td>
+        <td>{{ vivienda.extras.join(', ') }}</td>
+        <td>
+          <span class="status-badge" [ngClass]="vivienda.status.toLowerCase()">
+            {{ vivienda.status }}
+          </span>
+        </td>
+        <td class="actions-column">
+          <button mat-icon-button color="primary" (click)="editarVivienda(vivienda.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="vivienda.status === 'RESERVED' && vivienda.client_id == null" mat-button (click)="reservarVivienda(vivienda)">Vincular cliente</button>
+          <ng-container [ngSwitch]="vivienda.status.toLowerCase()">
+            <button *ngSwitchCase="'available'" mat-icon-button class="reserved-button" (click)="reservarVivienda(vivienda)">
+              <mat-icon>book</mat-icon>
+            </button>
+            <button *ngSwitchCase="'reserved'" mat-icon-button class="sold-button" [disabled]="vivienda.client_id == null" (click)="venderVivienda(vivienda)">
+              <mat-icon>sell</mat-icon>
+            </button>
+            <button *ngSwitchCase="'reserved'" mat-icon-button aria-label="Cancelar reserva" (click)="cancelarReserva(vivienda)">
+              <mat-icon>undo</mat-icon>
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,8 @@
+<div class="main-container">
+    <h2>¿Dónde estás pensando mudarte?</h2>
+    <hr/>
+    <h3>&#8226; Si tienes dudas, te ayudamos a elegir &#8226;</h3>
+  <div class="grid-places">
+    <app-location-card *ngFor="let place of places" [imageSource]="place.img" [place]="place.label" [link]="place.link"></app-location-card>
+  </div>
+</div>

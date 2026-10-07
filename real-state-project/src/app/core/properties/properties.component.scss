@@ -1,0 +1,154 @@
+@import "theme";
+// Icons inside the filter
+.icon {
+  width: 15px;
+  margin-right: 5px;
+}
+.main-container {
+  background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
+    url("../../../assets/png/bg-pattern.png");
+  padding-top: 30px;
+  padding-bottom: 45px;
+
+  .header {
+    margin-top: 45px;
+    text-align: center;
+    h1 {
+      font-size: 70px;
+      color: $primary-color;
+    }
+    p {
+      color: $black;
+      font-weight: 700;
+      text-align: justify;
+      width: 60vw;
+      margin: 10px auto;
+    }
+  }
+
+  .filters-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: $third-color;
+    margin: 70px auto;
+    align-self: center;
+    padding: 10px;
+    width: 80vw;
+    border: 2px solid $primary-color;
+
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-self: center;
+      button {
+        width: 140px;
+      }
+    }
+  }
+
+  .contact-form {
+    position: sticky;
+    float: right;
+    margin-right: 50px;
+    top: 25%;
+    height: 65vh;
+    max-height: 480px;
+    width: 25vw;
+    border-radius: 5px;
+  }
+
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: $primary-color;
+    img {
+      width: 50vw;
+      align-self: center;
+    }
+  }
+  .dialog-button{
+    display: none;
+  }
+}
+
+@media (max-width: $ml-breakpoint) {
+  .main-container {
+    .header {
+      p {
+        width: 80vw;
+      }
+    }
+    .households {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .filters-container {
+      .filters {
+        flex-direction: column;
+      }
+    }
+
+    .contact-form {
+      display: none;
+    }
+    .dialog-button{
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      width: 100vw;
+      background-color: $primary-color;
+      color: white;
+      border-top-right-radius: 15px;      
+      border-top-left-radius: 15px;      
+    }
+  }
+
+  // TODO: redondear borde, crear boton para formulario.
+}
+@media (max-width: $sm-breakpoint) {
+}
+
+.custom-checkbox {
+  ::ng-deep .mat-checkbox-frame {
+    border-color: black;
+  }
+
+  ::ng-deep .mat-checkbox-checkmark-path {
+    stroke: black !important;
+  }
+
+  ::ng-deep .mat-checkbox-background {
+    background-color: white;
+  }
+
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: white !important;
+  }
+}
+
+.comparador {
+  margin: 24px auto;
+  width: 80vw;
+  box-sizing: border-box;
+  font-family: $main-font;
+  padding: 20px;
+  background: #f4f8fa;
+  color: #17384a;
+  border-radius: 8px;
+  .tabla-comparativa { overflow-x: auto; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ccdce4; }
+}

@@ -1,0 +1,67 @@
+@import 'theme.scss';
+
+:host {
+  display: block;
+  background-color: $light-gray;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: $box-shadow;
+}
+
+h2 {
+  color: $primary-color;
+  font-family: $main-font;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+p {
+  color: $black;
+  font-family: $main-font;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+button {
+  font-family: $main-font;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &.cancel {
+    background-color: $mid-gray;
+    color: $black;
+
+    &:hover {
+      background-color: darken($mid-gray, 10%);
+    }
+  }
+
+  &.confirm {
+    background-color: $secondary-color;
+    color: white;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+
+  &.delete {
+    background-color: $fourth-color;
+    color: white;
+
+    &:hover {
+      background-color: darken($fourth-color, 10%);
+    }
+  }
+}

@@ -1,0 +1,153 @@
+<!-- Muestra el spinner mientras los datos se están cargando -->
+<div class="spinner">
+  <ngx-spinner
+    bdColor="rgba(255,255,255,1)"
+    type="line-scale-party"
+    [template]="getTemplate()"
+    [fullScreen]="true"
+  >
+  </ngx-spinner>
+</div>
+
+<div class="main-container">
+  <div class="header">
+    <h1>Elige tu vivienda</h1>
+    <p>
+      Descubre una amplia gama de inmuebles en venta que se adaptan a tus
+      necesidades y estilo de vida. Desde acogedores apartamentos hasta
+      elegantes casas, tenemos la casa perfecta para ti.
+    </p>
+    <p>
+      Explora nuestras propiedades en ubicaciones privilegiadas, con diseños
+      modernos y características excepcionales. Encuentra el hogar que siempre
+      has soñado con nosotros.
+    </p>
+  </div>
+
+  <div class="filters-container">
+    <div class="filters">
+      <mat-form-field color="third">
+        <mat-label>Ubicaciones</mat-label>
+        <mat-select
+          disableOptionCentering="true"
+          [(ngModel)]="ubicacionesSeleccionadas"
+          multiple
+        >
+          <mat-option
+            *ngFor="
+              let ubicacion of [
+                'Huelva',
+                'El Rompido',
+                'Punta Umbría',
+                'El Portil'
+              ]
+            "
+            [value]="ubicacion"
+          >
+            {{ ubicacion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field color="third">
+        <mat-label>Extras</mat-label>
+        <mat-select
+          disableOptionCentering="true"
+          [(ngModel)]="extrasSeleccionados"
+          multiple
+        >
+          <mat-option
+            *ngFor="let extra of ['piscina', 'garaje', 'terraza', 'buhardilla']"
+            [value]="extra"
+          >
+            <span>
+              <img
+                class="icon"
+                src="../../../assets/icons/{{ extra }}.png"
+                [alt]="extra"
+              />{{ extra | uppercase }}</span
+            >
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field color="third">
+        <mat-label>Precio Máximo</mat-label>
+        <input
+          matInput
+          placeholder="0"
+          [(ngModel)]="maxPrice"
+          name="price"
+          type="number"
+          step="10000"
+          min="10000"
+          placeholder="10000"
+        />
+      </mat-form-field>
+      <mat-form-field color="third">
+        <mat-label>Mínimo Habitaciones</mat-label>
+        <input
+          matInput
+          placeholder="1"
+          [(ngModel)]="minRooms"
+          name="rooms"
+          type="number"
+          step="1"
+          max="5"
+          min="1"
+        />
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="onlyFavorites" class="custom-checkbox">
+        Solo Favoritos
+      </mat-checkbox>
+    </div>
+    <div class="buttons">
+      <button mat-button color="third" (click)="clearFilters()">
+        Borrar Filtros
+      </button>
+      <button mat-raised-button color="primary" (click)="applyFilters()">
+        Aplicar Filtros
+      </button>
+    </div>
+  </div>
+
+  <section class="comparador">
+    <h2>Compara tus favoritos</h2>
+    <p>Guarda entre dos y tres viviendas y compara sus características antes de contactar.</p>
+    <button mat-raised-button color="primary" (click)="compararFavoritos()">Comparar favoritos</button>
+    <p *ngIf="avisoComparativa" role="status">{{ avisoComparativa }}</p>
+    <div class="tabla-comparativa" *ngIf="comparativa.length">
+      <table>
+        <thead><tr><th>Característica</th><th *ngFor="let vivienda of comparativa">Vivienda {{ vivienda.id }} · {{ vivienda.ubication }}</th></tr></thead>
+        <tbody>
+          <tr><th>Precio con descuento</th><td *ngFor="let vivienda of comparativa">{{ vivienda.price * (1 - vivienda.discount / 100) | currency:'EUR' }}</td></tr>
+          <tr><th>Superficie</th><td *ngFor="let vivienda of comparativa">{{ vivienda.square_metres }} m²</td></tr>
+          <tr><th>Precio por m²</th><td *ngFor="let vivienda of comparativa">{{ vivienda.square_metres > 0 ? ((vivienda.price * (1 - vivienda.discount / 100) / vivienda.square_metres) | currency:'EUR') : 'Sin datos' }}</td></tr>
+          <tr><th>Habitaciones</th><td *ngFor="let vivienda of comparativa">{{ vivienda.rooms }}</td></tr>
+          <tr><th>Baños</th><td *ngFor="let vivienda of comparativa">{{ vivienda.bathrooms }}</td></tr>
+          <tr><th>Eficiencia energética</th><td *ngFor="let vivienda of comparativa">{{ vivienda.energy_efficiency }}</td></tr>
+          <tr><th>Extras</th><td *ngFor="let vivienda of comparativa">{{ vivienda.extras.join(', ') || 'Sin extras' }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="contact-form" *ngIf="(filteredProperties$ | async)?.length != 0">
+    <app-contact-to-buy></app-contact-to-buy>
+  </div>
+
+  <div class="households">
+    <div *ngFor="let vivienda of filteredProperties$ | async; let i = index">
+      <app-house-card
+        [appartmentData]="vivienda"
+        [mapIndex]="i"
+      ></app-house-card>
+    </div>
+  </div>
+  <div class="dialog-button" (click)="openContactForm()">
+    <h2>Contáctanos</h2>
+  </div>
+  <div class="no-results" *ngIf="(filteredProperties$ | async)?.length == 0">
+    <h2>Sin resultados. ¿Probamos con otros filtros?</h2>
+    <img src="../../../assets/png/no-results.png" alt="no-results" />
+  </div>
+</div>

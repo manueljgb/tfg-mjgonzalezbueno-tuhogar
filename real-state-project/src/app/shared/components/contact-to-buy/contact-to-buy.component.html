@@ -1,0 +1,42 @@
+<div class="main-container">
+    <h1 class="header" *ngIf="!displaySuccesMessage" >¿Te gusta lo que ves?</h1>
+    <h2 class="subheader" *ngIf="!displaySuccesMessage" >Selecciona las viviendas que llamen tu atención y rellena el formulario:</h2>
+    <p *ngIf="error" role="alert">{{ error }}</p>
+    <form class="contact-form" (ngSubmit)="submitForm()" *ngIf="!displaySuccesMessage" >
+      <mat-form-field (click)="hideSuccessMessage()" class="mat-third name">
+        <input matInput placeholder="Nombre Completo" [(ngModel)]="fullName" name="fullName" required>
+      </mat-form-field>
+      
+      <mat-form-field (click)="hideSuccessMessage()" class="mat-third phone">
+        <input type="phone" matInput placeholder="Teléfono" [(ngModel)]="phone" name="phone" required>
+      </mat-form-field>
+      
+      <mat-form-field (click)="hideSuccessMessage()" class="mat-third email">
+        <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+      </mat-form-field>
+      
+      <mat-form-field class="mat-third">
+        <mat-label>¿Qué necesitas?</mat-label>
+        <mat-select [(ngModel)]="tipoSolicitud" name="tipoSolicitud">
+          <mat-option value="Información">Información</mat-option>
+          <mat-option value="Visita">Concertar una visita</mat-option>
+          <mat-option value="Reserva">Solicitar una reserva</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p class="solicitud-info">La solicitud se aplica a tus viviendas favoritas. La agencia confirmará la disponibilidad antes de reservar.</p>
+      <p *ngIf="tipoSolicitud !== 'Información' && !tieneFavoritos()">Selecciona al menos una vivienda favorita para solicitar una visita o reserva.</p>
+      <mat-form-field (click)="hideSuccessMessage()" class="mat-third text">
+        <textarea matInput placeholder="Mensaje" [(ngModel)]="message" name="message" required></textarea>
+      </mat-form-field>
+      <div class="buttons">
+        <button mat-button type="submit" color="primary" [disabled]="!formValidator() || enviando">Contáctanos</button>
+        <button type="button" class="close-modal" mat-button color="third" (click)="closeDialog()">Cerrar</button>
+      </div>
+    </form>
+    <div class="succes-container" *ngIf="displaySuccesMessage">
+      <h2 class="succes-header" >¡Mensaje enviado con éxito! Pronto nos pondremos en contacto contigo.</h2>
+      <h2 class="succes-text" >¿Te queda algo por decir? Haz click en el siguiente botón para mostrar el formulario de nuevo.</h2>
+      <button mat-button color="primary" (click)="hideSuccessMessage()">Restablecer</button>
+      <button class="close-modal" mat-button color="third" (click)="closeDialog()">Cerrar</button>
+    </div>
+</div>

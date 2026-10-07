@@ -1,0 +1,377 @@
+<div class="desktop" *ngIf="desktop()">
+  <div
+    class="main-container"
+    [ngStyle]="{ 'width.px': carouselWidth }"
+    (mouseenter)="makeContainerWidder()"
+    (mouseleave)="makeContainerWidder(); openFirstBox()"
+  >
+    <div class="carousel" [ngStyle]="{ 'width.px': carouselWidth }">
+      <div
+        class="box box-paso1"
+        [ngClass]="{ openBox: haveBeenInside }"
+        (mouseenter)="closeFirstBox()"
+      >
+        <div class="tittle">
+          <span class="step">Paso 1</span>
+          <h2>Búsqueda y asesoramiento inicial</h2>
+          <img
+            src="assets/svg/linea-blanca.svg"
+            alt="linea blanca"
+            title="Línea blanca de subtitulo"
+            class="line lazyload"
+          />
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>
+              Entrevista inicial: TuHogar se reúne con el cliente para comprender sus necesidades, preferencias y presupuesto.
+            </li>
+            <li>
+              Asesoramiento personalizado: Se brinda orientación experta sobre el mercado inmobiliario, opciones de financiamiento y requisitos legales.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-paso2" (mouseenter)="closeFirstBox()">
+        <div class="tittle">
+          <span class="step">Paso 2</span>
+          <h2>Selección de propiedades</h2>
+          <img
+            src="assets/svg/linea-blanca.svg"
+            alt="linea blanca"
+            title="Línea blanca de subtitulo"
+            class="line lazyload"
+          />
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>
+              Búsqueda de propiedades: TuHogar realiza una búsqueda exhaustiva para encontrar propiedades que se ajusten a los requisitos del cliente.
+            </li>
+            <li>
+              Visitas a las propiedades: Se organizan visitas a las propiedades seleccionadas para que el cliente las pueda ver personalmente y evaluarlas.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-paso3" (mouseenter)="closeFirstBox()">
+        <div class="tittle">
+          <span class="step">Paso 3</span>
+          <h2>Negociación y cierre</h2>
+          <img
+            src="assets/svg/linea-blanca.svg"
+            alt="linea blanca"
+            title="Línea blanca de subtitulo"
+            class="line lazyload"
+          />
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>
+              Evaluación de precios: TuHogar ayuda al cliente a determinar el valor justo de la propiedad y a establecer una estrategia de negociación.
+            </li>
+            <li>
+              Negociación de términos: Se negocian los términos del contrato de compra/venta, incluyendo el precio, plazos y condiciones.
+            </li>
+            <li>
+              Asistencia legal: Se brinda apoyo en la revisión de contratos y se coordina con abogados u otros profesionales para asegurar un cierre exitoso.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-paso4" (mouseenter)="closeFirstBox()">
+        <div class="tittle">
+          <span class="step">Paso 4</span>
+          <h2>Gestión de trámites</h2>
+          <img
+            src="assets/svg/linea-blanca.svg"
+            alt="linea blanca"
+            title="Línea blanca de subtitulo"
+            class="line lazyload"
+          />
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>
+              Trámites legales: TuHogar ayuda al cliente en la obtención de los documentos necesarios y en la gestión de trámites legales como escrituras, registros y permisos.
+            </li>
+            <li>
+              Coordinación de inspecciones: Se organizan inspecciones de la propiedad, como inspecciones estructurales, evaluaciones de calidad del aire, etc.
+            </li>
+            <li>
+              Apoyo en financiamiento: Si es necesario, se colabora en la gestión de financiamiento hipotecario, proporcionando información sobre opciones y asistencia en la preparación de la documentación.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-paso5" (mouseenter)="closeFirstBox()">
+        <div class="tittle">
+          <span class="step">Paso 5</span>
+          <h2>Seguimiento post-venta</h2>
+          <img
+            src="assets/svg/linea-blanca.svg"
+            alt="linea blanca"
+            title="Línea blanca de subtitulo"
+            class="line lazyload"
+          />
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>
+              Asistencia en mudanza: TuHogar puede proporcionar recomendaciones de empresas de mudanza y apoyar en la coordinación de la logística.
+            </li>
+            <li>
+              Servicio al cliente: Se brinda atención continua después de la compra, resolviendo cualquier consulta o problema que surja relacionado con la propiedad.
+            </li>
+            <li>
+              Referencias y recomendaciones: Si el cliente requiere servicios adicionales, TuHogar puede proporcionar referencias confiables de proveedores de servicios relacionados, como decoradores, contratistas, etc.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile" *ngIf="!desktop()">
+  <div class="main-container">
+    <div class="accordion-container">
+      <cdk-accordion class="accordion">
+        <div class="box-paso1 wrapper">
+          <cdk-accordion-item
+            #seleccion="cdkAccordionItem"
+            class="accordion-item"
+            accordion="acc"
+            role="button"
+            [attr.id]="'accordion-header-1'"
+            [attr.aria-expanded]="seleccion.expanded"
+            [attr.aria-controls]="'accordion-body-1'"
+            tabindex="0"
+          >
+            <div class="accordion-item-header" (click)="seleccion.toggle()">
+              <div class="tittle">
+                <span class="step">Paso 1</span>
+                <h2>Búsqueda y asesoramiento inicial</h2>
+                <img
+                  src="assets/svg/linea-blanca.svg"
+                  alt="linea blanca"
+                  title="Línea blanca de subtitulo"
+                  class="line lazyload"
+                />
+              </div>
+            </div>
+            <div
+              class="accordion-item-body"
+              role="region"
+              [style.display]="seleccion.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + 1"
+              [attr.aria-labelledby]="'accordion-header-' + 1"
+            >
+              <div class="content">
+                <ul>
+                  <li>
+                    Entrevista inicial: TuHogar se reúne con el cliente para comprender sus necesidades, preferencias y presupuesto.
+                  </li>
+                  <li>
+                    Asesoramiento personalizado: Se brinda orientación experta sobre el mercado inmobiliario, opciones de financiamiento y requisitos legales.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </div>
+        <div class="box-paso2 wrapper">
+          <cdk-accordion-item
+            #revision="cdkAccordionItem"
+            class="accordion-item"
+            accordion="acc"
+            role="button"
+            [attr.id]="'accordion-header-2'"
+            [attr.aria-expanded]="revision.expanded"
+            [attr.aria-controls]="'accordion-body-2'"
+            tabindex="0"
+          >
+            <div class="accordion-item-header" (click)="revision.toggle()">
+              <div class="tittle">
+                <span class="step">Paso 2</span>
+                <h2>Selección de propiedades</h2>
+                <img
+                  src="assets/svg/linea-blanca.svg"
+                  alt="linea blanca"
+                  title="Línea blanca de subtitulo"
+                  class="line lazyload"
+                />
+              </div>
+            </div>
+            <div
+              class="accordion-item-body"
+              role="region"
+              [style.display]="revision.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + 2"
+              [attr.aria-labelledby]="'accordion-header-' + 2"
+            >
+              <div class="content">
+                <ul>
+                  <li>
+                    Búsqueda de propiedades: TuHogar realiza una búsqueda exhaustiva para encontrar propiedades que se ajusten a los requisitos del cliente.
+                  </li>
+                  <li>
+                    Visitas a las propiedades: Se organizan visitas a las propiedades seleccionadas para que el cliente las pueda ver personalmente y evaluarlas.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </div>
+        <div class="box-paso3 wrapper">
+          <cdk-accordion-item
+            #reacondicionamiento="cdkAccordionItem"
+            class="accordion-item"
+            accordion="acc"
+            role="button"
+            [attr.id]="'accordion-header-2'"
+            [attr.aria-expanded]="reacondicionamiento.expanded"
+            [attr.aria-controls]="'accordion-body-2'"
+            tabindex="0"
+          >
+            <div
+              class="accordion-item-header"
+              (click)="reacondicionamiento.toggle()"
+            >
+              <div class="tittle">
+                <span class="step">Paso 3</span>
+                <h2 class="reaco">
+                  Negociación y cierre
+                </h2>
+                <img
+                  src="assets/svg/linea-blanca.svg"
+                  alt="linea blanca"
+                  title="Línea blanca de subtitulo"
+                  class="line lazyload"
+                />
+              </div>
+            </div>
+            <div
+              class="accordion-item-body"
+              role="region"
+              [style.display]="reacondicionamiento.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + 2"
+              [attr.aria-labelledby]="'accordion-header-' + 2"
+            >
+              <div class="content">
+                <ul>
+                  <li>
+                    Evaluación de precios: TuHogar ayuda al cliente a determinar el valor justo de la propiedad y a establecer una estrategia de negociación.
+                  </li>
+                  <li>
+                    Negociación de términos: Se negocian los términos del contrato de compra/venta, incluyendo el precio, plazos y condiciones.
+                  </li>
+                  <li>
+                    Asistencia legal: Se brinda apoyo en la revisión de contratos y se coordina con abogados u otros profesionales para asegurar un cierre exitoso.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </div>
+        <div class="box-paso4 wrapper">
+          <cdk-accordion-item
+            #presentacion="cdkAccordionItem"
+            class="accordion-item"
+            accordion="acc"
+            role="button"
+            [attr.id]="'accordion-header-2'"
+            [attr.aria-expanded]="presentacion.expanded"
+            [attr.aria-controls]="'accordion-body-2'"
+            tabindex="0"
+          >
+            <div class="accordion-item-header" (click)="presentacion.toggle()">
+              <div class="tittle">
+                <span class="step">Paso 4</span>
+                <h2>Gestión de trámites</h2>
+                <img
+                  src="assets/svg/linea-blanca.svg"
+                  alt="linea blanca"
+                  title="Línea blanca de subtitulo"
+                  class="line lazyload"
+                />
+              </div>
+            </div>
+            <div
+              class="accordion-item-body"
+              role="region"
+              [style.display]="presentacion.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + 2"
+              [attr.aria-labelledby]="'accordion-header-' + 2"
+            >
+              <div class="content">
+                <ul>
+                  <li>
+                    Trámites legales: TuHogar ayuda al cliente en la obtención de los documentos necesarios y en la gestión de trámites legales como escrituras, registros y permisos.
+                  </li>
+                  <li>
+                    Coordinación de inspecciones: Se organizan inspecciones de la propiedad, como inspecciones estructurales, evaluaciones de calidad del aire, etc.
+                  </li>
+                  <li>
+                    Apoyo en financiamiento: Si es necesario, se colabora en la gestión de financiamiento hipotecario, proporcionando información sobre opciones y asistencia en la preparación de la documentación.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </div>
+        <div class="box-paso5 wrapper">
+          <cdk-accordion-item
+            #garantia="cdkAccordionItem"
+            class="accordion-item"
+            accordion="acc"
+            role="button"
+            [attr.id]="'accordion-header-2'"
+            [attr.aria-expanded]="garantia.expanded"
+            [attr.aria-controls]="'accordion-body-2'"
+            tabindex="0"
+          >
+            <div class="accordion-item-header" (click)="garantia.toggle()">
+              <div class="tittle">
+                <span class="step">Paso 5</span>
+                <h2>Seguimiento post-venta</h2>
+                <img
+                  src="assets/svg/linea-blanca.svg"
+                  alt="linea blanca"
+                  title="Línea blanca de subtitulo"
+                  class="line lazyload"
+                />
+              </div>
+            </div>
+            <div
+              class="accordion-item-body"
+              role="region"
+              [style.display]="garantia.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + 2"
+              [attr.aria-labelledby]="'accordion-header-' + 2"
+            >
+              <div class="content">
+                <ul>
+                  <li>
+                    Asistencia en mudanza: TuHogar puede proporcionar recomendaciones de empresas de mudanza y apoyar en la coordinación de la logística.
+                  </li>
+                  <li>
+                    Servicio al cliente: Se brinda atención continua después de la compra, resolviendo cualquier consulta o problema que surja relacionado con la propiedad.
+                  </li>
+                  <li>
+                    Referencias y recomendaciones: Si el cliente requiere servicios adicionales, TuHogar puede proporcionar referencias confiables de proveedores de servicios relacionados, como decoradores, contratistas, etc.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </div>
+      </cdk-accordion>
+    </div>
+  </div>
+</div>

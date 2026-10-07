@@ -1,0 +1,91 @@
+@import "theme";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $third-color;
+  height: 65vh;
+  max-height: 540px;
+  padding: 10px;
+  overflow: auto;
+  border-radius: 5px;
+  border: 2px solid $primary-color;
+
+  .header {
+    margin: 5px;
+    text-align: center;
+    color: $primary-color;
+  }
+  .subheader {
+    padding: 5px;
+    color: $black;
+    font-size: 18px;
+    text-align: justify;
+  }
+
+  .succes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    padding: 5px;
+
+    .succes-header {
+      color: $primary-color;
+      font-size: 18px;
+      text-align: center;
+    }
+    .succes-text {
+      color: $black;
+      font-size: 15px;
+      text-align: justify;
+    }
+
+    button {
+      max-width: 150px;
+      align-self: center;
+    }
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+
+    .solicitud-info {
+      width: 85%;
+      text-align: center;
+      line-height: 1.5;
+      margin: 8px 0 16px;
+    }
+
+    mat-form-field {
+      padding-left: 15px;
+      width: 85%;
+      border-radius: 5px;
+      filter: brightness(95%);
+    }
+    button:disabled {
+      background-color: $mid-gray;
+      color: $black;
+      cursor: not-allowed;
+    }
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .close-modal {
+    display: none;
+  }
+}
+
+@media (max-width: $ml-breakpoint) {
+  .main-container {
+    .close-modal {
+      display: inherit;
+    }
+  }
+}

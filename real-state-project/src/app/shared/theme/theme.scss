@@ -1,0 +1,26 @@
+@import "~@angular/material/theming";
+
+//import fonts
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap");
+@include mat-core();
+
+$primary-color: #227c9d;
+$secondary-color: #229d81;
+$third-color: #f4f2de;
+$fourth-color: #9d4322;
+
+$dark-gray: #7b7b7b;
+$mid-gray: #e4e4e4;
+$light-gray: #f8f8f8;
+
+$box-shadow: 0px 6px 15px #00000049;
+
+$black: #2b2b2b;
+
+//######################## Fonts ########################
+$main-font: "Raleway", sans-serif;
+$section-header-size: 35px;
+
+//######################## Media Querys ########################
+$sm-breakpoint: 480px;
+$ml-breakpoint: 1100px;

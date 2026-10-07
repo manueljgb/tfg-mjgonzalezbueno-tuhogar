@@ -1,0 +1,49 @@
+<div class="datos-container">
+  <h2>Actividad comercial</h2>
+  <p class="intro-datos">Resumen del catálogo, del seguimiento de clientes y de la evolución de las ventas.</p>
+  <h3>Comparativa de ventas por mes</h3>
+  <p class="chart-description">Ventas de 2020 a 2023 para comparar la actividad en cada época del año.</p>
+  <form class="filtros-ventas" [formGroup]="filtrosVentasForm" (ngSubmit)="aplicarFiltrosVentas()">
+    <mat-form-field appearance="outline">
+      <mat-label>Ubicación</mat-label>
+      <mat-select formControlName="ubicacion">
+        <mat-option value="">Todas las ubicaciones</mat-option>
+        <mat-option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion">{{ ubicacion }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de vivienda</mat-label>
+      <mat-select formControlName="tipoVivienda">
+        <mat-option value="">Todos los tipos</mat-option>
+        <mat-option *ngFor="let tipo of tiposVivienda" [value]="tipo.value">{{ tipo.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Precio mínimo (€)</mat-label>
+      <input matInput type="number" min="0" step="any" formControlName="precioMinimo">
+      <mat-error>El precio no puede ser negativo</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Precio máximo (€)</mat-label>
+      <input matInput type="number" min="0" step="any" formControlName="precioMaximo">
+      <mat-error>El precio no puede ser negativo</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="filtrosVentasForm.invalid || rangoPrecioInvalido()">Aplicar filtros</button>
+    <button mat-button type="button" (click)="borrarFiltrosVentas()">Borrar filtros</button>
+  </form>
+  <p class="error-filtros" *ngIf="rangoPrecioInvalido()" role="alert">El precio mínimo no puede superar al máximo.</p>
+  <p class="resultado-filtros" role="status">{{ totalVentas ? totalVentas + ' ventas en la selección.' : 'No hay ventas que coincidan con los filtros.' }}</p>
+  <div class="chart-box chart-box-large">
+    <canvas baseChart [data]="ventasData" [options]="ventasOptions" type="bar"></canvas>
+  </div>
+  <h3>Disponibilidad de viviendas</h3>
+  <p class="chart-description">Permite revisar cuántas viviendas siguen disponibles y cuántas están reservadas o vendidas.</p>
+  <div class="chart-box chart-box-round">
+    <canvas baseChart [data]="viviendasData" [options]="chartOptions" type="doughnut"></canvas>
+  </div>
+  <h3>Seguimiento de clientes</h3>
+  <p class="chart-description">Ayuda a identificar los contactos nuevos y los casos pendientes de seguimiento.</p>
+  <div class="chart-box chart-box-round">
+    <canvas baseChart [data]="clientesData" [options]="chartOptions" type="doughnut"></canvas>
+  </div>
+</div>

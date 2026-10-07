@@ -1,0 +1,249 @@
+@import "theme";
+.box-paso1 {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.683),
+      rgba(22, 22, 22, 0.68)
+    ),
+    url("../../../../assets/jpg/paso1.jpg");
+}
+
+.box-paso2 {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.683),
+      rgba(22, 22, 22, 0.68)
+    ),
+    url("../../../../assets/jpg/paso2.jpg");
+}
+
+.box-paso3 {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.683),
+      rgba(22, 22, 22, 0.68)
+    ),
+    url("../../../../assets/jpg/paso3.jpg");
+}
+
+.box-paso4 {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.683),
+      rgba(22, 22, 22, 0.68)
+    ),
+    url("../../../../assets/jpg/paso4.jpg");
+}
+
+.box-paso5 {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.683),
+      rgba(22, 22, 22, 0.68)
+    ),
+    url("../../../../assets/jpg/paso5.jpg");
+}
+
+.desktop {
+  .main-container {
+    height: 544px;
+    width: 100vw;
+    margin: 5px auto;
+  }
+
+  .carousel {
+    display: flex;
+    width: 700px;
+    box-sizing: border-box;
+    height: 544px;
+    margin: 5px auto;
+  }
+
+  .box {
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    width: 131px;
+    max-width: 530px;
+    height: 544px;
+    overflow: hidden;
+    transition: 0.5s;
+    margin: 0 5px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+
+    .tittle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 15px;
+      margin-top: 28px;
+
+      h2 {
+        margin: 0;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 700;
+        color: white;
+        width: 116px;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        white-space: break-spaces;
+      }
+
+      .line {
+        margin-top: 7px;
+        height: 4px;
+        width: 25px;
+      }
+
+      .step {
+        display: block;
+        font-size: 14px;
+        line-height: 16px;
+        color: $mid-gray;
+      }
+    }
+
+    ul {
+      color: white;
+      display: none;
+      margin: 27px 40px;
+      text-align: left;
+
+      li {
+        margin-bottom: 16px;
+        font-size: 15px;
+        font-family: 'Courier New', Courier, monospace;
+        line-height: 25px;
+        list-style-image: url("../../../../assets/png/list-icon-crop-7.png");
+      }
+    }
+  }
+
+  .box:hover,
+  .openBox {
+    
+    flex: 1 1 35%;
+
+    .tittle {
+      transition: 0.5s;
+      margin-left: 70px;
+      margin-top: 24px;
+
+      h2 {
+        line-height: 32px;
+        font-size: 34px;
+        width: 100%;
+      }
+
+      .line {
+        width: 70px;
+      }
+
+      .step {
+        line-height: 32px;
+        font-size: 28px;
+      }
+    }
+
+    span {
+      transition: 0.5s;
+    }
+
+    ul {
+      display: block;
+    }
+  }
+}
+
+.mobile {
+  .main-container {
+    width: calc(100vw - 36px);
+    margin: 0 18px;
+  }
+
+  .wrapper {
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+  }
+
+  .accordion {
+    border-radius: 5px;
+  }
+
+  .accordion-item-header {
+    margin-bottom: 7px;
+    min-height: 109px;
+
+    .tittle {
+      margin: 0 19px;
+      padding: 29px 0px 34px 0px;
+
+      h2 {
+        margin: 0;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .line {
+        height: 4px;
+        width: 25px;
+      }
+
+      .step {
+        display: block;
+        font-size: 14px;
+        line-height: 16px;
+        color: $mid-gray;
+      }
+    }
+  }
+
+  .accordion-item[aria-expanded="true"] {
+    .tittle {
+      margin: 0 19px;
+      padding: 29px 0px 0px 0px;
+
+      h2 {
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .reaco {
+        font-size: 24px;
+        line-height: 18px;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        white-space: break-spaces;
+      }
+
+      .line {
+        width: 70px;
+      }
+
+      .step {
+        color: $mid-gray;
+        font-size: 28px;
+        line-height: 32px;
+      }
+    }
+  }
+
+  ul {
+    color: white;
+    margin: 0px 19px;
+    text-align: left;
+
+    li {
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 25px;
+      list-style-image: url("../../../../assets/png/list-icon-crop-7.png");
+    }
+  }
+
+  ul:last-child {
+    padding-bottom: 40px;
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,76 @@
+@import 'src/app/shared/theme/theme.scss';
+
+.vivienda-form-container {
+  background-color: $primary-color;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.vivienda-form-title {
+  color: white;
+  font-family: $main-font;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep {
+  .mat-form-field-label {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .mat-form-field-ripple {
+    background-color: white !important;
+  }
+
+  .mat-input-element {
+    color: white !important;
+  }
+
+  .mat-select-value, .mat-select-arrow {
+    color: white !important;
+  }
+}
+
+mat-dialog-content {
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+mat-dialog-actions {
+  padding-top: 1rem;
+}
+
+button[mat-raised-button] {
+  background-color: $secondary-color;
+  color: white;
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}
+
+button[mat-button] {
+  background-color: $dark-gray;
+  color: white;
+  &:hover {
+    background-color: darken($dark-gray, 10%);
+  }
+}

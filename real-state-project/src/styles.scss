@@ -1,0 +1,64 @@
+@use "@angular/material" as mat;
+@import "~@angular/material/theming";
+@import "~leaflet/dist/leaflet.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import "theme";
+@include mat-core();
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  background-color: $light-gray;
+}
+body {
+  margin: 0;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  span {
+    font-family: $main-font !important;
+  }
+}
+
+.mat-contacto,
+.mat-primary {
+  color: white;
+  background-color: $primary-color;
+}
+.mat-third {
+  color: $black;
+  background-color: $third-color;
+}
+
+.mat-vivienda {
+  color: white;
+  background-color: $secondary-color;
+}
+
+mat-radio-button {
+  .mat-radio-container {
+    span {
+      color: $primary-color;
+    }
+  }
+}
+
+.house-map-marker {
+  width: 18px !important;
+  height: 18px !important;
+  margin-left: -9px !important;
+  margin-top: -9px !important;
+  border-radius: 50%;
+  border: 3px solid white;
+  background-color: $primary-color;
+  box-shadow: 0 2px 8px #00000066;
+}
+
+.leaflet-container {
+  z-index: 1;
+}

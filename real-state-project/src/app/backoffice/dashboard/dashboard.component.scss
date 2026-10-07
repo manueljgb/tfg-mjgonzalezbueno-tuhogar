@@ -1,0 +1,49 @@
+@import 'theme.scss';
+
+.dashboard-container {
+  display: flex;
+  font-family: $main-font;
+}
+
+.dashboard-menu {
+  width: 250px;
+  height: calc(100vh - 70px);
+  position: fixed;
+  background-color: $primary-color;
+  padding: 30px 20px;
+  box-shadow: $box-shadow;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 20px;
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: $third-color;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $secondary-color;
+          color: $light-gray;
+        }
+      }
+    }
+  }
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  margin-left: 290px;
+  padding: 30px;
+  background-color: $light-gray;
+  overflow-y: auto;
+  max-width: calc(100vw - 290px);
+}

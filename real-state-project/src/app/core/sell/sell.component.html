@@ -1,0 +1,105 @@
+<div class="main-container">
+    <div class="header">
+        <h1>Vende tu vivienda</h1>
+        <p>Te ayudamos a preparar la venta, publicar la vivienda y organizar las visitas para encontrar compradores con mas posibilidades.</p>
+    </div>
+
+    <div class="sell-content">
+        <section class="info-panel">
+            <h2>Como trabajamos</h2>
+            <div class="step">
+                <span>1</span>
+                <div>
+                    <h3>Valoracion inicial</h3>
+                    <p>Revisamos zona, metros, estado y precio orientativo para preparar una primera estimacion.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span>2</span>
+                <div>
+                    <h3>Publicacion y visitas</h3>
+                    <p>Organizamos la ficha, filtramos interesados y coordinamos visitas para ahorrar tiempo.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span>3</span>
+                <div>
+                    <h3>Seguimiento de la venta</h3>
+                    <p>Te acompanamos hasta cerrar la operacion y resolver dudas de compradores.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <div class="form-header">
+                <h2>Solicita una valoracion</h2>
+                <p>Cuantos mas datos nos dejes, mejor podremos preparar la llamada.</p>
+            </div>
+
+            <form [formGroup]="personalDataForm" (ngSubmit)="submitForm()">
+                <div class="form-grid">
+                    <mat-form-field class="mat-third">
+                        <mat-label>Nombre completo</mat-label>
+                        <input matInput formControlName="fullName" required>
+                        <mat-error *ngIf="personalDataForm.get('fullName')?.hasError('required')">El nombre es obligatorio</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Telefono</mat-label>
+                        <input type="tel" matInput formControlName="phone" required>
+                        <mat-error *ngIf="personalDataForm.get('phone')?.hasError('required')">El telefono es obligatorio</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngIf="personalDataForm.get('email')?.hasError('required')">El email es obligatorio</mat-error>
+                        <mat-error *ngIf="personalDataForm.get('email')?.hasError('email')">Introduce un email valido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Ubicacion aproximada</mat-label>
+                        <input matInput formControlName="ubicacion" required>
+                        <mat-error *ngIf="personalDataForm.get('ubicacion')?.hasError('required')">La ubicacion es obligatoria</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Tipo de vivienda</mat-label>
+                        <mat-select formControlName="tipoVivienda" required>
+                            <mat-option *ngFor="let tipo of tiposVivienda" [value]="tipo">{{tipo}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="personalDataForm.get('tipoVivienda')?.hasError('required')">Selecciona un tipo</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Metros cuadrados</mat-label>
+                        <input type="number" matInput formControlName="metros" required>
+                        <mat-error *ngIf="personalDataForm.get('metros')?.hasError('required')">Los metros son obligatorios</mat-error>
+                        <mat-error *ngIf="personalDataForm.get('metros')?.hasError('min')">Introduce una superficie valida</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third">
+                        <mat-label>Precio orientativo</mat-label>
+                        <input type="number" matInput formControlName="precioOrientativo">
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-third comments">
+                        <mat-label>Comentarios</mat-label>
+                        <textarea matInput rows="4" formControlName="message"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" mat-raised-button [disabled]="guardando">Solicitar valoracion</button>
+                </div>
+            </form>
+
+            <p *ngIf="error" role="alert">{{ error }}</p>
+            <div class="succes-container" *ngIf="displaySuccesMessage">
+                <h2>Solicitud enviada</h2>
+                <p>Te llamaremos para acordar una visita y preparar una primera valoracion.</p>
+                <button mat-button color="primary" (click)="hideSuccessMessage()">Enviar otra solicitud</button>
+            </div>
+        </section>
+    </div>
+</div>

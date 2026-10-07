@@ -1,0 +1,120 @@
+<div class="vivienda-form-container">
+  <h2 class="vivienda-form-title">{{ isEditMode ? 'Editar' : 'Crear' }} Vivienda</h2>
+  <mat-dialog-content>
+    <form [formGroup]="viviendaForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input matInput placeholder="Precio" formControlName="price" type="number">
+        <mat-error *ngIf="viviendaForm.get('price')?.hasError('required')">El precio es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descuento (%)</mat-label>
+        <input matInput placeholder="Descuento" formControlName="discount" type="number" min="0" max="100">
+        <mat-error *ngIf="viviendaForm.get('discount')?.hasError('min') || viviendaForm.get('discount')?.hasError('max')">El descuento debe estar entre 0 y 100</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="House">Casa</mat-option>
+          <mat-option value="Apartment">Apartamento</mat-option>
+        </mat-select>
+        <mat-error *ngIf="viviendaForm.get('type')?.hasError('required')">El tipo es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Imágenes</mat-label>
+        <mat-select formControlName="images" multiple>
+          <mat-option *ngFor="let image of imageOptions" [value]="image">{{image}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ubicación</mat-label>
+        <mat-select formControlName="ubication">
+          <mat-option value="Huelva">Huelva</mat-option>
+          <mat-option value="Punta Umbría">Punta Umbría</mat-option>
+          <mat-option value="El Rompido">El Rompido</mat-option>
+          <mat-option value="El Portil">El Portil</mat-option>
+        </mat-select>
+        <mat-error *ngIf="viviendaForm.get('ubication')?.hasError('required')">La ubicación es obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Metros cuadrados</mat-label>
+        <input matInput placeholder="Metros cuadrados" formControlName="square_metres" type="number">
+        <mat-error *ngIf="viviendaForm.get('square_metres')?.hasError('required')">Los metros cuadrados son obligatorios</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Eficiencia energética</mat-label>
+        <mat-select formControlName="energy_efficiency">
+          <mat-option *ngFor="let ef of ['A', 'B', 'C', 'D', 'E']" [value]="ef">{{ef}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="viviendaForm.get('energy_efficiency')?.hasError('required')">La eficiencia energética es obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Habitaciones</mat-label>
+        <input matInput placeholder="Habitaciones" formControlName="rooms" type="number">
+        <mat-error *ngIf="viviendaForm.get('rooms')?.hasError('required')">El número de habitaciones es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Baños</mat-label>
+        <input matInput placeholder="Baños" formControlName="bathrooms" type="number">
+        <mat-error *ngIf="viviendaForm.get('bathrooms')?.hasError('required')">El número de baños es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Año de construcción</mat-label>
+        <input matInput placeholder="Año de construcción" formControlName="date_built" type="number">
+        <mat-error *ngIf="viviendaForm.get('date_built')?.hasError('required')">El año de construcción es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Pisos</mat-label>
+        <input matInput placeholder="Pisos" formControlName="floors" type="number">
+        <mat-error *ngIf="viviendaForm.get('floors')?.hasError('required')">El número de pisos es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Extras</mat-label>
+        <mat-select formControlName="extras" multiple>
+          <mat-option *ngFor="let extra of extrasOptions" [value]="extra">{{extra}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="viviendaForm.get('extras')?.hasError('required')">Los extras son obligatorios</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="AVAILABLE">Disponible</mat-option>
+          <mat-option value="RESERVED">Reservado</mat-option>
+          <mat-option value="SOLD">Vendido</mat-option>
+        </mat-select>
+        <mat-error *ngIf="viviendaForm.get('status')?.hasError('required')">El estado es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Latitud</mat-label>
+        <input matInput placeholder="Latitud" formControlName="latitud" type="number">
+        <mat-error *ngIf="viviendaForm.get('latitud')?.hasError('required')">La latitud es obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Longitud</mat-label>
+        <input matInput placeholder="Longitud" formControlName="longitud" type="number">
+        <mat-error *ngIf="viviendaForm.get('longitud')?.hasError('required')">La longitud es obligatoria</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()">Cancelar</button>
+    <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()">Eliminar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!viviendaForm.valid">
+      {{ isEditMode ? 'Actualizar' : 'Crear' }}
+    </button>
+  </mat-dialog-actions>
+</div>

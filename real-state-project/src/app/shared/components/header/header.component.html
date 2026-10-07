@@ -1,0 +1,90 @@
+<mat-toolbar id = "desktopMenu" class="toolbar desktop-toolbar">
+    <div class="logo">
+      <a [routerLink]="['']"><img [src]="logoSrc" alt="logo" /></a>
+    </div>
+    <div class="menu-items" >
+      <ng-container *ngFor="let item of menuItems">
+        <a
+          [ngClass]="item.desplegable ? 'no-desplegable' : ''"
+          [routerLink]="item.link"
+          ><button
+            class="menu-button"
+            mat-button
+            [matMenuTriggerFor]="subMenu"
+            #menuTrigger="matMenuTrigger"
+            (mouseenter)="buttonEnter(menuTrigger)"
+            (mouseleave)="buttonLeave(menuTrigger)"
+          >
+            <span>{{ item.label }}</span
+            ><mat-icon *ngIf="item.desplegable">arrow_drop_down</mat-icon>
+          </button></a
+        >
+  
+        <mat-menu
+          [hasBackdrop]="false"
+          #subMenu="matMenu"
+          [ngClass]="item.desplegable ? '' : 'noneMenu'"
+          class="mat-menu-dropdown"
+        >
+          <div
+            [ngClass]="item.desplegable ? 'containerMenuSubItems' : 'noneMenu'"
+            (mouseenter)="menuenter()"
+            (mouseleave)="menuLeave(menuTrigger)"
+          >
+            <ng-container *ngFor="let subItem of item.items">
+              <button class="headerSubMenuItems" mat-menu-item [routerLink]="subItem.path">
+               
+                {{ subItem.label }}
+              </button>
+             
+            </ng-container>
+          </div>
+        </mat-menu>
+        <mat-menu class="noneMenu" #none="matMenu"></mat-menu>
+      </ng-container>
+    </div>
+    
+    <div class="info" (mouseleave)="closePhoneInfo()">
+      <div class="phone" >
+        <a [href]="phoneTo" (mouseenter)="openPhoneInfo()"
+          ><img [src]="phoneImgSrc" alt="phone"
+        /></a>
+  
+        <div class="mobile-call" id="phone-info" (mouseenter)="openPhoneInfo()">
+          <div class="call">
+            <h3>¡LLÁMANOS!</h3>
+            <h1>954 123 456</h1>
+          </div>
+  
+          <div class="schedule">
+            <h4>Horario de atención telefónica</h4>
+            <p>
+              De Lunes a viernes de 9:00 a 20:30h y los sábados 9:00 a 18:00h de forma ininterrumpida
+            </p>
+          </div>
+        </div>
+      </div>
+      <a [href]='localizacion' target="_blank" ><img [src]="addressImgSrc" alt="gps" /></a>
+      <!-- <a [routerLink]="'/contacto'"><img [src]="mailImgSrc" alt="mail" /></a> -->
+    </div>
+  </mat-toolbar>
+  
+  <mat-toolbar id = "mobileMenu" class="toolbar mobile-toolbar">
+    <button class="menu-button" mat-button (click)="openMobileMenu()">
+      <mat-icon class="menu-icon">menu</mat-icon>
+    </button>
+  
+    <div class="logo">
+      <a [routerLink]="['']"><img [src]="logoSrc" alt="logo" /></a>
+    </div>
+    <a [href]="phoneTo"><img [src]="phoneImgSrc" alt="phone" /></a>
+      <div class="mobile-menu">
+      <app-menu-mobile
+        #mobileMenu
+        [phoneImgSrc]="phoneImgSrc.replace('.svg', '-red.svg')"
+        [addressImgSrc]="addressImgSrc.replace('.svg', '-red.svg')"
+        [mailImgSrc]="mailImgSrc.replace('.svg', '-red.svg')"
+      ></app-menu-mobile>
+    </div>
+  </mat-toolbar>
+  

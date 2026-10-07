@@ -1,0 +1,354 @@
+@import 'theme.scss';
+
+$detalle-label-color: #555555;
+
+.clientes-container {
+  padding: 20px;
+  font-family: $main-font;
+
+  h2 {
+    color: $primary-color;
+    font-size: $section-header-size;
+    margin-bottom: 20px;
+  }
+}
+
+.resumen-clientes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+
+  div {
+    background-color: white;
+    border-left: 4px solid $secondary-color;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: $box-shadow;
+  }
+
+  span {
+    display: block;
+    color: $dark-gray;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  strong {
+    color: $primary-color;
+    font-size: 20px;
+  }
+}
+
+.graficas-clientes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  div {
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: $box-shadow;
+    height: 340px;
+    box-sizing: border-box;
+  }
+
+  h3 {
+    color: $primary-color;
+    margin-top: 0;
+  }
+
+  canvas {
+    max-height: 285px;
+  }
+
+  div:first-child {
+    max-width: 520px;
+    justify-self: stretch;
+  }
+}
+
+.filtros-clientes {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: $primary-color;
+  border-radius: 4px;
+
+  .mat-form-field {
+    flex: 1;
+  }
+}
+
+.clientes-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(360px, 0.9fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.clientes-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 4px;
+  overflow: hidden;
+
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid $mid-gray;
+    vertical-align: middle;
+  }
+
+  td:first-child {
+    font-weight: 600;
+    color: $black;
+    max-width: 210px;
+  }
+
+  th {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  tr {
+    cursor: pointer;
+  }
+
+  tr:nth-child(even) {
+    background-color: $light-gray;
+  }
+}
+
+.detalle-cliente {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: $box-shadow;
+  position: sticky;
+  top: 20px;
+
+  h3, h4 {
+    color: $primary-color;
+  }
+
+  h3 {
+    margin: 4px 0 0;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  h4 {
+    margin-bottom: 8px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .detalle-field {
+    display: block;
+    background-color: white;
+    margin-bottom: 12px;
+  }
+
+  ::ng-deep .detalle-field .mat-form-field-flex {
+    background-color: white;
+  }
+
+  ::ng-deep .detalle-field,
+  ::ng-deep .detalle-field .mat-form-field-wrapper,
+  ::ng-deep .detalle-field .mat-form-field-subscript-wrapper {
+    background-color: white;
+  }
+
+  ::ng-deep .detalle-field .mat-form-field-label,
+  ::ng-deep .detalle-field.mat-focused .mat-form-field-label {
+    color: $detalle-label-color;
+  }
+
+  ::ng-deep .detalle-field .mat-select-value,
+  ::ng-deep .detalle-field .mat-select-arrow,
+  ::ng-deep .detalle-field textarea,
+  ::ng-deep .detalle-field input {
+    color: $black;
+  }
+
+  ::ng-deep .detalle-field textarea {
+    caret-color: $primary-color;
+  }
+
+  ::ng-deep .detalle-field .mat-form-field-outline,
+  ::ng-deep .detalle-field .mat-form-field-outline-thick {
+    color: $mid-gray;
+  }
+
+  ::ng-deep .detalle-field .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  ::ng-deep .detalle-field .mat-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+.detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid $mid-gray;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+
+  span:first-child {
+    color: $detalle-label-color;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.detalle-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cerrar-detalle {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  color: $dark-gray;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  &:hover {
+    color: $primary-color;
+    background-color: $light-gray;
+  }
+}
+
+.contacto-cliente {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+
+  div {
+    background-color: $light-gray;
+    padding: 10px;
+    border-radius: 4px;
+    min-width: 0;
+  }
+
+  span {
+    display: block;
+    color: $detalle-label-color;
+    font-size: 12px;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  strong {
+    color: $black;
+    font-size: 14px;
+    word-break: break-word;
+  }
+}
+
+.historial-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+
+  li {
+    background-color: $light-gray;
+    border-left: 4px solid $secondary-color;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .mensaje-mail {
+    white-space: pre-line;
+    font-family: $main-font;
+  }
+}
+
+.empty-info {
+  color: $dark-gray;
+  background-color: $light-gray;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 0 0 16px;
+}
+
+.nota-form {
+  margin-top: 10px;
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+    background-color: white;
+  }
+
+  button {
+    background-color: $secondary-color;
+    color: white;
+    margin-top: 10px;
+  }
+}
+
+::ng-deep .estado-cliente-panel {
+  background-color: white;
+
+  .mat-option {
+    color: $black;
+  }
+
+  .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $primary-color;
+  }
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  background-color: $dark-gray;
+
+  &.new {
+    background-color: $primary-color;
+  }
+
+  &.contacted {
+    background-color: $secondary-color;
+  }
+
+  &.follow_up {
+    background-color: #FFC107;
+    color: black;
+  }
+
+  &.closed {
+    background-color: $fourth-color;
+  }
+}
+
+.vivienda-cliente {
+  padding: 12px 0;
+  border-bottom: 1px solid #d8e2ea;
+}

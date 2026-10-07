@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <p>{{ data.message }}</p>
+  <mat-form-field *ngIf="data.clientes" appearance="outline">
+    <mat-label>Cliente de la operación</mat-label>
+    <mat-select [(ngModel)]="clienteId">
+      <mat-option *ngFor="let cliente of data.clientes" [value]="cliente.id">{{ cliente.name }} · {{ cliente.phone }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="cancel" (click)="onNoClick()">Cancelar</button>
+  <button [disabled]="data.clientes && clienteId === undefined" [class]="data.isDelete ? 'delete' : 'confirm'" (click)="onYesClick()" cdkFocusInitial>
+    {{ data.isDelete ? 'Eliminar' : 'Confirmar' }}
+  </button>
+</mat-dialog-actions>

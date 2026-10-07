@@ -1,0 +1,151 @@
+<div class="clientes-container">
+  <h2>Gestion de Clientes</h2>
+
+  <div class="resumen-clientes" *ngIf="resumenClientes$ | async as resumen">
+    <div>
+      <span>Total</span>
+      <strong>{{ resumen.total }}</strong>
+    </div>
+    <div>
+      <span>Nuevos</span>
+      <strong>{{ resumen.nuevos }}</strong>
+    </div>
+    <div>
+      <span>Seguimiento</span>
+      <strong>{{ resumen.seguimiento }}</strong>
+    </div>
+    <div>
+      <span>Con favoritos</span>
+      <strong>{{ resumen.conFavoritos }}</strong>
+    </div>
+  </div>
+
+  <form class="filtros-clientes" [formGroup]="filtrosForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar cliente</mat-label>
+      <input matInput formControlName="busqueda">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado" panelClass="estado-cliente-panel">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let estado of estados" [value]="estado.value">{{ estado.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <div class="clientes-layout">
+    <table class="clientes-table mat-elevation-z8">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Telefono</th>
+          <th>Mensajes</th>
+          <th>Favoritos</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientesFiltrados$ | async" (click)="seleccionarCliente(cliente)">
+          <td>{{ cliente.name || 'Sin nombre' }}</td>
+          <td>{{ cliente.phone }}</td>
+          <td>{{ cliente.messages.length }}</td>
+          <td>{{ (cliente.favs_appartments || []).length }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="(cliente.status || 'NEW').toLowerCase()">
+              {{ getEstadoLabel(cliente.status) }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="detalle-cliente" *ngIf="clienteSeleccionado$ | async as cliente">
+      <div class="detalle-header">
+        <div>
+          <span>Ficha de cliente</span>
+          <h3>{{ getNombreCliente(cliente) }}</h3>
+        </div>
+        <div class="detalle-actions">
+          <span class="status-badge" [ngClass]="(cliente.status || 'NEW').toLowerCase()">
+            {{ getEstadoLabel(cliente.status) }}
+          </span>
+          <button mat-icon-button type="button" class="cerrar-detalle" aria-label="Cerrar ficha de cliente" (click)="cerrarDetalle()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="contacto-cliente">
+        <div>
+          <span>Email</span>
+          <strong>{{ cliente.mail || 'Sin email' }}</strong>
+        </div>
+        <div>
+          <span>Telefono</span>
+          <strong>{{ cliente.phone || 'Sin telefono' }}</strong>
+        </div>
+        <div>
+          <span>Favoritos</span>
+          <strong>{{ (cliente.favs_appartments || []).length }}</strong>
+        </div>
+        <div>
+          <span>Ultimo contacto</span>
+          <strong>{{ cliente.last_contact || 'Pendiente' }}</strong>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="detalle-field">
+        <mat-label>Estado del caso</mat-label>
+        <mat-select [value]="cliente.status || 'NEW'" panelClass="estado-cliente-panel" (selectionChange)="cambiarEstado(cliente, $event.value)">
+          <mat-option *ngFor="let estado of estados" [value]="estado.value">{{ estado.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h4>Solicitudes recibidas</h4>
+      <ul class="historial-list">
+        <li *ngFor="let solicitud of cliente.requests">{{ solicitud.date | date:'dd/MM/yyyy HH:mm' }} · {{ solicitud.type }} · Vivienda {{ solicitud.apartment_id }}</li>
+      </ul>
+      <h4>Viviendas y operaciones</h4>
+      <div *ngIf="viviendas$ | async as viviendas">
+        <p *ngIf="!getViviendasCliente(cliente, viviendas).length">Todavía no hay viviendas asociadas.</p>
+        <div class="vivienda-cliente" *ngFor="let vivienda of getViviendasCliente(cliente, viviendas)">
+          <strong>Vivienda {{ vivienda.id }} · {{ vivienda.ubication }}</strong>
+          <p>{{ vivienda.price | currency:'EUR' }} · {{ vivienda.status === 'AVAILABLE' ? 'Disponible' : vivienda.status === 'RESERVED' ? 'Reservada' : 'Vendida' }}</p>
+          <button mat-button *ngIf="vivienda.status === 'AVAILABLE'" [disabled]="guardando" (click)="registrarOperacion(cliente, vivienda, 'RESERVED')">Reservar</button>
+          <ng-container *ngIf="vivienda.status === 'RESERVED' && vivienda.client_id === cliente.id">
+            <button mat-button [disabled]="guardando" (click)="registrarOperacion(cliente, vivienda, 'SOLD')">Registrar venta</button>
+            <button mat-button [disabled]="guardando" (click)="registrarOperacion(cliente, vivienda, 'AVAILABLE')">Cancelar reserva</button>
+          </ng-container>
+          <ng-container *ngFor="let operacion of vivienda.operations">
+            <p *ngIf="operacion.client_id === cliente.id">{{ operacion.date | date:'dd/MM/yyyy HH:mm' }} · {{ operacion.status === 'RESERVED' ? 'Reserva' : operacion.status === 'SOLD' ? 'Venta' : 'Reserva cancelada' }}</p>
+          </ng-container>
+        </div>
+      </div>
+      <h4>Mensajes</h4>
+      <ul class="historial-list" *ngIf="getMensajesCliente(cliente).length > 0; else sinMensajes">
+        <li class="mensaje-mail" *ngFor="let message of getMensajesCliente(cliente)">{{ message }}</li>
+      </ul>
+      <ng-template #sinMensajes>
+        <p class="empty-info">No hay mensajes con contenido.</p>
+      </ng-template>
+
+      <h4>Notas internas</h4>
+      <ul class="historial-list" *ngIf="getNotasCliente(cliente).length > 0; else sinNotas">
+        <li *ngFor="let note of getNotasCliente(cliente)">{{ note }}</li>
+      </ul>
+      <ng-template #sinNotas>
+        <p class="empty-info">Todavia no hay notas internas.</p>
+      </ng-template>
+
+      <form [formGroup]="notaForm" class="nota-form">
+        <mat-form-field appearance="outline" class="detalle-field">
+          <mat-label>Nueva nota</mat-label>
+          <textarea matInput formControlName="nota"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="addNota(cliente)">Anadir nota</button>
+      </form>
+    </section>
+  </div>
+</div>

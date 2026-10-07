@@ -1,0 +1,42 @@
+<div class="main-container" id="main-container">
+    <mat-divider></mat-divider>
+    <mat-icon class="close" (click)="closeMobileMenu()">close</mat-icon>
+    <ng-container *ngFor="let item of menuItems">
+      <div class="menu-items">
+        <!-- //TODO: Change mouseenter for click -->
+        <a (click)="navigate(item.link, menuTrigger, item.desplegable)"
+          ><button
+            class="menu-button"
+            [id]="item.desplegable? 'concesionarios' : ' '"
+            [matMenuTriggerFor]="subMenu"
+            #menuTrigger="matMenuTrigger"
+            (clickOutside)="closeMenu(menuTrigger);"
+            [ngClass]="menuTrigger.menuOpen ? 'red-button' : ''"
+            style="z-index: 1050"
+          >
+            <span>{{ item.label }}</span
+            ><mat-icon *ngIf="item.desplegable">arrow_drop_down</mat-icon>
+          </button>
+        </a>
+      </div>
+      <mat-menu
+        [hasBackdrop]="false"
+        #subMenu="matMenu"
+        [ngClass]="item.desplegable ? '' : 'noneMenu'"
+      >
+        <div [ngClass]="item.desplegable ? 'containerMenuSubItems' : 'noneMenu'">
+          <ng-container *ngFor="let subItem of concesionarios">
+            <button class="headerSubMenuItems" mat-menu-item (click)="navigate(subItem, menuTrigger)">
+              {{ subItem.privincia }}
+            </button>
+            <ng-container *ngFor="let subSubItems of subItem.centros">
+              <button class="subMenuItems" mat-menu-item (click) = "navigate(subItem, menuTrigger)">
+                {{ subSubItems.nombre_centro }} 
+              </button>
+            </ng-container>
+          </ng-container>
+        </div>
+      </mat-menu>
+    </ng-container>
+  </div>
+  

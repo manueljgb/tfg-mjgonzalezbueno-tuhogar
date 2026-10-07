@@ -1,0 +1,126 @@
+@import "theme";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 35px;
+
+  .image-banner {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-left: 3rem;
+    height: 35vh;
+    align-items: flex-end;
+    margin-bottom: 20px;
+
+    h1 {
+      font-size: 4rem;
+      color: white;
+      z-index: 1;
+    }
+  }
+
+  .intro-text {
+    font-size: 1.5rem;
+    text-align: justify;
+    padding: 0px 3rem;
+    max-width: 80vw;
+    align-self: center;
+  }
+  .icon {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-self: center;
+    margin-top: 10px;
+    .read-more {
+      width: 20px;
+      margin-top: -15px;
+    }
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
+
+  .header-intro {
+    // padding-left: 50px;
+    text-align: center;
+    font-size: 2em;
+    text-shadow: 0px 6px 15px #00000029;
+    color: $primary-color;
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+  hr {
+    width: 300px;
+    height: 2px;
+    background-color: $primary-color;
+    border: none;
+    margin-bottom: 45px;
+  }
+  .image-banner::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 50%
+    );
+  }
+  .reasons-to-move {
+    display: grid;
+    margin-top: 25px;
+    grid-template-columns: repeat(3, 350px);
+    gap: 30px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .map{
+    width: 80vw;
+    height: 40vw;
+    align-self: center;
+    box-shadow: $box-shadow;
+  }
+
+}
+
+@media (max-width: $ml-breakpoint) {
+  .main-container {
+    .reasons-to-move {
+      grid-template-columns: repeat(2, 330px);
+      gap: 30px 20px;
+    }
+  }
+}
+
+@media (max-width: $sm-breakpoint) {
+  .main-container {
+    .intro-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .full-text {
+      -webkit-line-clamp: inherit;
+    }
+    .hidden-mobile {
+      display: inherit;
+    }
+    .reasons-to-move {
+      grid-template-columns: repeat(1, 90vw);
+    }
+  }
+}

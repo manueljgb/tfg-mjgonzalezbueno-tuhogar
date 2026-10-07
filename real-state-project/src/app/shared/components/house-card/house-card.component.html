@@ -1,0 +1,63 @@
+<div class="main-container">
+  
+  <div class="carousel-container">
+    <div class="keen-slider" #sliderRef>
+      <ng-container *ngFor="let img of appartmentData.images; let i = index">
+        <div [class]="'keen-slider__slide img-slide main'">
+          <img class="main-img" src="assets/data/{{img}}" alt="Foto de la casa {{i+1}}">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="appartmentData.images.length == 0">
+        <div [class]="'keen-slider__slide img-slide main'">
+          <img class="main-img" src="assets/data/no-image-placeholder.png" alt="Placeholder">
+        </div>
+      </ng-container>
+    </div>
+    <div class="keen-slider thumbnail" #thumbnailRef>
+      <ng-container *ngFor="let img of appartmentData.images; let i = index">
+        <div [class]="'keen-slider__slide img-slide'"><img class="thumbnail-img" src="assets/data/{{img}}" alt="Foto de la casa {{i+1}}"></div>
+      </ng-container>
+      <ng-container *ngIf="appartmentData.images.length == 0">
+        <div [class]="'keen-slider__slide img-slide'"><img class="thumbnail-img" src="assets/data/no-image-placeholder.png" alt="Placeholder"></div>
+      </ng-container>
+    </div>
+    
+  </div>
+  <div class="data">
+    <div class="heart" (click)="toggleFavStatus()">
+      <img src="../../../../assets/svg/heart-empty.svg" alt="Corazón vacío" *ngIf="!fav">
+      <img src="../../../../assets/svg/heart-filled.svg" alt="Corazón lleno" *ngIf="fav">
+    </div>
+    <div>
+
+      <div class="primary-data">
+        <h2>{{appartmentData.ubication}}</h2>
+        <div class="pills">
+          <h2>{{appartmentData.square_metres}} <span>m2</span></h2>
+          <h2>{{appartmentData.floors}} <span>plantas</span></h2>
+          <h2>{{appartmentData.rooms}} <span>espacios</span></h2>
+          <h2>{{appartmentData.bathrooms}} <span>baños</span></h2>
+        </div>
+      </div>
+      <div class="extras">
+        <h2>EXTRAS</h2>
+        <div class="icons">
+          <ng-container *ngFor="let extra of appartmentData.extras">
+            <img class="icon" src="../../../assets/icons/{{extra}}.png" [alt]="extra" matTooltip = "{{extra}}" matTooltipClass = "iconTooltip">
+          </ng-container>
+        </div>
+      </div>
+      <div #mapRef class="map"></div>
+    </div>
+
+    <div class="price-container">
+        <ng-container *ngIf="appartmentData.discount === 0 else discountPrice">
+            <h1 class="price">{{appartmentData.price | currency:'EUR' : 'symbol' : '1.0-0'}} </h1>
+        </ng-container>
+        <ng-template #discountPrice>
+            <h1 class="wrong-price">{{appartmentData.price | currency:'EUR' : 'symbol' : '1.0-0'}} </h1>
+            <h1 class="price">{{getDiscountedPrice(appartmentData.price, appartmentData.discount) | currency:'EUR' : 'symbol' : '1.0-0'}} </h1>
+        </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+export enum ElPortilInfoEnum {
+    Playas = ' El Portil cuenta con hermosas playas de arena fina y aguas cristalinas. Podrás disfrutar del sol, dar largos paseos por la orilla del mar y disfrutar de refrescantes baños en las tranquilas aguas.',
+    Entorno = 'Rodeado de parajes naturales como el Paraje Natural de las Marismas del Odiel, El Portil ofrece un entorno único. Podrás explorar la rica biodiversidad y disfrutar de actividades al aire libre como senderismo, observación de aves y paseos en bicicleta.',
+    Actividades = 'La ubicación costera de El Portil ofrece numerosas opciones para disfrutar de actividades acuáticas como surf, paddle surf, kayak y pesca. Sumérgete en el mar y disfruta de la emoción de los deportes acuáticos.',
+    Golf = 'Si eres aficionado al golf, te encantará saber que El Portil cuenta con un campo de golf de 18 hoyos de alta calidad. Podrás practicar tu swing y disfrutar de vistas espectaculares mientras juegas',
+    Ubicacion = ' El Portil se encuentra estratégicamente ubicado, lo que te permitirá acceder fácilmente a otros lugares de interés en la provincia de Huelva. Podrás explorar ciudades cercanas como Huelva capital, Punta Umbría y Mazagón.',
+    Gastronomia = 'En El Portil podrás deleitarte con la gastronomía local, que destaca por su variedad de mariscos y pescados frescos. Disfruta de platos típicos como la coquina, el choco, las gambas blancas y mucho más.',
+} 
